@@ -60,4 +60,5 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+// 모델 이름과 스키마
 module.exports = mongoose.model("User", UserSchema);
