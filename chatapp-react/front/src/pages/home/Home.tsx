@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import Topbar from '../../components/topbar/Topbar';
-import Sidebar from '../../components/sidebar/sidebar';
+import Sidebar from '../../components/sidebar/Sidebar';
 
 const Home = () => {
   return (
