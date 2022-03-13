@@ -11,6 +11,7 @@ import {
 } from '@material-ui/icons';
 import styled from 'styled-components';
 import { Users } from '../../dummyData';
+import CloseFriend from '../closeFriend/CloseFriend';
 
 export default function Sidebar() {
   return (
@@ -75,8 +76,8 @@ export default function Sidebar() {
         <SidebarButton>Show More</SidebarButton>
         <SidebarHr />
         <SidebarFriendList>
-          {Users.map((u) => (
-            <li key={u.id}>{u.username}</li>
+          {Users.map((user) => (
+            <CloseFriend key={user.id} user={user} />
           ))}
         </SidebarFriendList>
       </SidebarWrapper>
