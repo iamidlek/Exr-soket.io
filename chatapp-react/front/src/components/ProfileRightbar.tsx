@@ -54,9 +54,11 @@ const RightbarTitle = styled.h4`
   font-weight: 500;
   margin-bottom: 10px;
 `;
+
 const RightbarInfo = styled.div`
   margin-bottom: 30px;
 `;
+
 const RightbarInfoItem = styled.div`
   margin-bottom: 10px;
 `;
@@ -66,6 +68,7 @@ const RightbarInfoKey = styled.span`
   margin-right: 15px;
   color: #555;
 `;
+
 const RightbarInfoValue = styled.span`
   font-weight: 300;
 `;
@@ -75,12 +78,14 @@ const RightbarFollowings = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
 `;
+
 const RightbarFollowing = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 20px;
   cursor: pointer;
 `;
+
 const RightbarFollowingImg = styled.img`
   width: 100px;
   height: 100px;

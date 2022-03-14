@@ -15,8 +15,8 @@ export default function Topbar() {
       </TopbarCenter>
       <TopbarRight>
         <div>
-          <TopbarLink className="topbarLink">Homepage</TopbarLink>
-          <TopbarLink className="topbarLink">Timeline</TopbarLink>
+          <TopbarLink>Homepage</TopbarLink>
+          <TopbarLink>Timeline</TopbarLink>
         </div>
         <TopbarIcons>
           <TopbarIconItem>
@@ -52,6 +52,7 @@ const TopbarContainer = styled.div`
 const TopbarLeft = styled.div`
   flex: 3;
 `;
+
 const Logo = styled.span`
   font-size: 24px;
   margin-left: 20px;
@@ -63,6 +64,7 @@ const Logo = styled.span`
 const TopbarCenter = styled.div`
   flex: 5;
 `;
+
 const Searchbar = styled.div`
   width: 100%;
   height: 30px;
@@ -71,6 +73,7 @@ const Searchbar = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const SearchIcon = styled(Search)`
   font-size: 20px !important;
   margin-left: 10px;
@@ -91,11 +94,13 @@ const TopbarRight = styled.div`
   justify-content: space-around;
   color: white;
 `;
+
 const TopbarLink = styled.span`
   margin-right: 10px;
   font-size: 14px;
   cursor: pointer;
 `;
+
 const TopbarIcons = styled.div`
   display: flex;
 `;
@@ -105,6 +110,7 @@ const TopbarIconItem = styled.div`
   cursor: pointer;
   position: relative;
 `;
+
 const TopbarIconBadge = styled.div`
   width: 15px;
   height: 15px;
@@ -119,6 +125,7 @@ const TopbarIconBadge = styled.div`
   justify-content: center;
   font-size: 12px;
 `;
+
 const TopbarImg = styled.img`
   width: 32px;
   height: 32px;

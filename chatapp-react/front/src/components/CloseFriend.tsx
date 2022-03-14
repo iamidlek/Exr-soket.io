@@ -9,6 +9,14 @@ export default function CloseFriend({ user }: Iprops) {
   );
 }
 
+interface Iprops {
+  user: {
+    id: number;
+    profilePicture: string;
+    username: string;
+  };
+}
+
 const SidebarFriend = styled.li`
   display: flex;
   align-items: center;
@@ -22,11 +30,3 @@ const SidebarFriendImg = styled.img`
   object-fit: cover;
   margin-right: 10px;
 `;
-
-interface Iprops {
-  user: {
-    id: number;
-    profilePicture: string;
-    username: string;
-  };
-}

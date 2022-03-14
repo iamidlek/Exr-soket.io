@@ -71,56 +71,68 @@ const Posts = styled.div`
 const PostWrapper = styled.div`
   padding: 10px;
 `;
+
 const PostTop = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
+
 const PostTopLeft = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const PostProfileImg = styled.img`
   width: 32px;
   height: 32px;
   border-radius: 50%;
   object-fit: cover;
 `;
+
 const PostUsername = styled.span`
   font-size: 15px;
   font-weight: 500;
   margin: 0 10px;
 `;
+
 const PostDate = styled.span`
   font-size: 12px;
 `;
+
 const PostCenter = styled.div`
   margin: 20px 0;
 `;
+
 const PostImg = styled.img`
   margin-top: 20px;
   width: 100%;
   max-height: 500px;
   object-fit: contain;
 `;
+
 const PostBottom = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
+
 const PostBottomLeft = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const LikeIcon = styled.img`
   width: 24px;
   height: 24px;
   margin-right: 5px;
   cursor: pointer;
 `;
+
 const PostLikeCounter = styled.div`
   font-size: 15px;
 `;
+
 const PostCommentText = styled.span`
   cursor: pointer;
   border-bottom: 1px dashed gray;
