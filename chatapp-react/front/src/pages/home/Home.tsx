@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Topbar from '../../components/Topbar';
 import Sidebar from '../../components/Sidebar';
+import Feed from '../../components/Feed';
 
 const Home = () => {
   return (
@@ -8,6 +9,7 @@ const Home = () => {
       <Topbar />
       <HomeContainer>
         <Sidebar />
+        <Feed />
       </HomeContainer>
     </>
   );
