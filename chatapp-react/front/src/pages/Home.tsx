@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import Topbar from '../../components/Topbar';
-import Sidebar from '../../components/Sidebar';
-import Feed from '../../components/Feed';
-import Rightbar from '../../components/Rightbar';
+import Topbar from '../components/Topbar';
+import Sidebar from '../components/Sidebar';
+import Feed from '../components/Feed';
+import Rightbar from '../components/Rightbar';
 
 const Home = () => {
   return (
