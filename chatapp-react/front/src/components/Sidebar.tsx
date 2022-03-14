@@ -10,8 +10,8 @@ import {
   School,
 } from '@material-ui/icons';
 import styled from 'styled-components';
-import { Users } from '../../dummyData';
-import CloseFriend from '../closeFriend/CloseFriend';
+import { Users } from '../dummyData';
+import CloseFriend from './CloseFriend';
 
 export default function Sidebar() {
   return (
