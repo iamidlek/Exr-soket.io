@@ -21,7 +21,7 @@ const AuthReducer = (state: InitialState, action: Action): InitialState => {
         error: action.payload,
       };
     case 'FOLLOW':
-      if (state!.user!.followings?.length) {
+      if (state!.user!.followings) {
         return {
           ...state,
           user: {
@@ -32,7 +32,7 @@ const AuthReducer = (state: InitialState, action: Action): InitialState => {
       }
       return state;
     case 'UNFOLLOW':
-      if (state!.user!.followings?.length) {
+      if (state!.user!.followings) {
         return {
           ...state,
           user: {
