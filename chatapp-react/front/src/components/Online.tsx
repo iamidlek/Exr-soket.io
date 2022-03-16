@@ -1,23 +1,18 @@
+import { IUser } from 'src/context/interface';
 import styled from 'styled-components';
 
-export default function Online({ user }: Iprops) {
+export default function Online({ user }: { user: IUser }) {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
   return (
     <RbarFriend>
       <RbarProfileImgContainer>
-        <RbarProfileImg src={user.profilePicture} alt="" />
+        <RbarProfileImg src={PF && PF + user?.profilePicture} alt="" />
         <RbarOnline />
       </RbarProfileImgContainer>
       <RbarUsername>{user.username}</RbarUsername>
     </RbarFriend>
   );
-}
-
-interface Iprops {
-  user: {
-    id: number;
-    profilePicture: string;
-    username: string;
-  };
 }
 
 const RbarFriend = styled.li`
