@@ -24,7 +24,7 @@
     "react/prop-types": ["off"],
     "react/display-name": ["off"],
     "react/no-unescaped-entities": ["off"],
-    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "indent": ["warn", 2, { "SwitchCase": 1 }],
     "quotes": ["error", "single"],
     "semi": ["error", "always"],
     "no-console": [
