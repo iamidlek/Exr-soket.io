@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export default function CloseFriend({ user }: Iprops) {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <SidebarFriend>
-      <SidebarFriendImg src={user.profilePicture} alt="profilePicture" />
+      <SidebarFriendImg src={PF + user.profilePicture} alt="profilePicture" />
       <span>{user.username}</span>
     </SidebarFriend>
   );
