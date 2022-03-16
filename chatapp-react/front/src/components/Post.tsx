@@ -1,13 +1,39 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { MoreVert } from '@material-ui/icons';
-import { Users } from '../dummyData';
+import { format } from 'timeago.js';
 import styled from 'styled-components';
+import { Ipost, IUser } from '../context/interface';
+import { AuthContext } from '../context/AuthContext';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
-export default function Post({ post }: Iprops) {
-  const [like, setLike] = useState(post.like);
+export default function Post({ post }: { post: Ipost }) {
+  const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState<IUser>();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user: currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (currentUser?._id) {
+      setIsLiked(post.likes.includes(currentUser._id));
+    }
+  }, [currentUser?._id, post.likes]);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await axios.get(`/api/users?userId=${post.userId}`);
+      setUser(data);
+    };
+    fetchUser();
+  }, [post.userId]);
 
   const likeHandler = () => {
+    try {
+      axios.put('/api/posts/' + post._id + '/like', {
+        userId: currentUser?._id,
+      });
+    } catch (err) {}
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
@@ -16,14 +42,18 @@ export default function Post({ post }: Iprops) {
       <PostWrapper>
         <PostTop>
           <PostTopLeft>
-            <PostProfileImg
-              src={Users.filter((u) => u.id === post?.userId)[0].profilePicture}
-              alt=""
-            />
-            <PostUsername>
-              {Users.filter((u) => u.id === post?.userId)[0].username}
-            </PostUsername>
-            <PostDate>{post.date}</PostDate>
+            <Link to={`/profile/${user?.username}`}>
+              <PostProfileImg
+                src={
+                  user?.profilePicture
+                    ? PF + user.profilePicture
+                    : PF + 'person/noAvatar.png'
+                }
+                alt=""
+              />
+            </Link>
+            <PostUsername>{user?.username}</PostUsername>
+            <PostDate>{format(post?.createdAt)}</PostDate>
           </PostTopLeft>
           <div>
             <MoreVert />
@@ -31,33 +61,21 @@ export default function Post({ post }: Iprops) {
         </PostTop>
         <PostCenter>
           <span>{post?.desc}</span>
-          <PostImg src={post.photo} alt="" />
+          <PostImg src={PF + post?.img} alt="" />
         </PostCenter>
         <PostBottom>
           <PostBottomLeft>
-            <LikeIcon src="assets/like.png" onClick={likeHandler} alt="" />
-            <LikeIcon src="assets/heart.png" onClick={likeHandler} alt="" />
+            <LikeIcon src={`${PF}like.png`} onClick={likeHandler} alt="" />
+            <LikeIcon src={`${PF}heart.png`} onClick={likeHandler} alt="" />
             <PostLikeCounter>{like} people like it</PostLikeCounter>
           </PostBottomLeft>
           <div>
-            <PostCommentText>{post.comment} comments</PostCommentText>
+            <PostCommentText>{post?.comment} comments</PostCommentText>
           </div>
         </PostBottom>
       </PostWrapper>
     </Posts>
   );
-}
-
-interface Iprops {
-  post: {
-    id: number;
-    desc?: string;
-    photo: string;
-    date: string;
-    userId: number;
-    like: number;
-    comment: number;
-  };
 }
 
 const Posts = styled.div`
