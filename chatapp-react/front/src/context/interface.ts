@@ -1,4 +1,5 @@
 export interface IUser {
+  _id?: string;
   username?: string;
   email?: string;
   password?: string;
@@ -11,6 +12,19 @@ export interface IUser {
   city?: string;
   from?: string;
   relationship?: number;
+  createdAt?: string;
+  updateAt?: string;
+}
+
+export interface Ipost {
+  _id?: string;
+  userId: string;
+  desc: string;
+  comment: string;
+  img: string;
+  likes: string[];
+  createdAt: string;
+  updateAt: string;
 }
 
 export interface InitialState {
