@@ -21,23 +21,23 @@ const AuthReducer = (state: InitialState, action: Action): InitialState => {
         error: action.payload,
       };
     case 'FOLLOW':
-      if (state!.user!.followings) {
+      if (state.user?.followings) {
         return {
           ...state,
           user: {
             ...state.user,
-            followings: [...state?.user!.followings, action.payload],
+            followings: [...state.user.followings, action.payload],
           },
         };
       }
       return state;
     case 'UNFOLLOW':
-      if (state!.user!.followings) {
+      if (state.user?.followings) {
         return {
           ...state,
           user: {
             ...state.user,
-            followings: state?.user!.followings.filter(
+            followings: state.user.followings.filter(
               (following) => following !== action.payload,
             ),
           },
