@@ -1,11 +1,18 @@
 import { Search, Person, Chat, Notifications } from '@material-ui/icons';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export default function Topbar() {
+  const { user } = useContext(AuthContext);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <TopbarContainer>
       <TopbarLeft>
-        <Logo>Nagisocial</Logo>
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <Logo>Nagisocial</Logo>
+        </Link>
       </TopbarLeft>
       <TopbarCenter>
         <Searchbar>
@@ -32,7 +39,16 @@ export default function Topbar() {
             <TopbarIconBadge>1</TopbarIconBadge>
           </TopbarIconItem>
         </TopbarIcons>
-        <TopbarImg src="/assets/person/1.jpeg" alt="person" />
+        <Link to={`/profile/${user?.username}`}>
+          <TopbarImg
+            src={
+              user?.profilePicture
+                ? PF + user.profilePicture
+                : PF + 'person/noAvatar.png'
+            }
+            alt="person"
+          />
+        </Link>
       </TopbarRight>
     </TopbarContainer>
   );
