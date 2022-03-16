@@ -1,22 +1,87 @@
-import { PermMedia, Label, Room, EmojiEmotions } from '@material-ui/icons';
+import React, { useContext, useRef, useState } from 'react';
+import {
+  PermMedia,
+  Label,
+  Room,
+  EmojiEmotions,
+  Cancel,
+} from '@material-ui/icons';
 import styled from 'styled-components';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
 
 export default function Share() {
+  const { user } = useContext(AuthContext);
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const desc = useRef<HTMLInputElement>(null);
+  const [file, setFile] = useState<File | null>();
+
+  const handleSetFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event?.target?.files;
+    if (files) {
+      setFile(files[0]);
+    }
+  };
+
+  const submitHandler = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const newPost = {
+      userId: user?._id,
+      desc: desc?.current?.value,
+      img: '',
+    };
+    if (file) {
+      const data = new FormData();
+      const fileName = Date.now() + file.name;
+      data.append('name', fileName);
+      data.append('file', file);
+      newPost.img = fileName;
+      console.log(newPost);
+      try {
+        await axios.post('/api/upload', data);
+      } catch (err) {}
+    }
+    try {
+      await axios.post('/api/posts', newPost);
+      window.location.reload();
+    } catch (err) {}
+  };
   return (
     <ShareBox>
       <ShareWrapper>
         <ShareTop>
-          <ShareProfileImg src="/assets/person/1.jpeg" alt="" />
-          <ShareInput placeholder="What's in your mind Safak?" />
+          <ShareProfileImg
+            src={
+              user?.profilePicture
+                ? PF + user.profilePicture
+                : PF + 'person/noAvatar.png'
+            }
+            alt=""
+          />
+          <ShareInput
+            ref={desc}
+            placeholder={'What`s in your mind ' + user?.username + '?'}
+          />
         </ShareTop>
         <ShareHr />
-        <ShareBottom>
+        {file && (
+          <ShareImgContainer>
+            <ShareImg src={URL.createObjectURL(file as File)} alt="" />
+            <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+          </ShareImgContainer>
+        )}
+        <ShareBottom onSubmit={submitHandler}>
           <ShareOptions>
-            <ShareOption>
-              <ShareIcon>
-                <PermMedia htmlColor="tomato" />
-              </ShareIcon>
+            <ShareOption as="label" htmlFor="file">
+              <PermMedia htmlColor="tomato" className="shareIcon" />
               <ShareOptionText>Photo or Video</ShareOptionText>
+              <input
+                style={{ display: 'none' }}
+                type="file"
+                id="file"
+                accept=".png,.jpeg,.jpg"
+                onChange={handleSetFile}
+              />
             </ShareOption>
             <ShareOption>
               <ShareIcon>
@@ -76,18 +141,22 @@ const ShareInput = styled.input`
     outline: none;
   }
 `;
+
 const ShareHr = styled.hr`
   margin: 20px;
 `;
+
 const ShareBottom = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
+
 const ShareOptions = styled.div`
   display: flex;
   margin-left: 20px;
 `;
+
 const ShareOption = styled.div`
   display: flex;
   align-items: center;
@@ -99,10 +168,12 @@ const ShareIcon = styled.span`
   font-size: 18px;
   margin-right: 3px;
 `;
+
 const ShareOptionText = styled.span`
   font-size: 14px;
   font-weight: 500;
 `;
+
 const ShareButton = styled.button`
   border: none;
   padding: 7px;
@@ -112,4 +183,14 @@ const ShareButton = styled.button`
   margin-right: 20px;
   cursor: pointer;
   color: white;
+`;
+
+const ShareImgContainer = styled.div`
+  padding: 0 20px 10px 20px;
+  position: relative;
+`;
+
+const ShareImg = styled.img`
+  width: 100%;
+  object-fit: cover;
 `;
