@@ -3,17 +3,11 @@ import styled from 'styled-components';
 import HomeRightbar from './HomeRightbar';
 import ProfileRightbar from './ProfileRightbar';
 
-export default function Rightbar({
-  profile = false,
-  user,
-}: {
-  profile?: boolean;
-  user?: IUser;
-}) {
+export default function Rightbar({ user }: { user?: IUser }) {
   return (
     <Rbar>
       <RbarWrapper>
-        {user && profile ? <ProfileRightbar user={user} /> : <HomeRightbar />}
+        {user ? <ProfileRightbar user={user} /> : <HomeRightbar />}
       </RbarWrapper>
     </Rbar>
   );
