@@ -25,26 +25,29 @@ export default function Share() {
 
   const submitHandler = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newPost = {
-      userId: user?._id,
-      desc: desc?.current?.value,
-      img: '',
-    };
     if (file) {
+      const newPost = {
+        userId: user?._id,
+        desc: desc?.current?.value,
+        img: '',
+      };
       const data = new FormData();
       const fileName = Date.now() + file.name;
       data.append('name', fileName);
       data.append('file', file);
       newPost.img = fileName;
-      console.log(newPost);
       try {
         await axios.post('/api/upload', data);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err);
+      }
+      try {
+        await axios.post('/api/posts', newPost);
+        window.location.reload();
+      } catch (err) {
+        console.log(err);
+      }
     }
-    try {
-      await axios.post('/api/posts', newPost);
-      window.location.reload();
-    } catch (err) {}
   };
   return (
     <ShareBox>
@@ -102,7 +105,7 @@ export default function Share() {
               <ShareOptionText>Feelings</ShareOptionText>
             </ShareOption>
           </ShareOptions>
-          <ShareButton>Share</ShareButton>
+          <ShareButton type="submit">Share</ShareButton>
         </ShareBottom>
       </ShareWrapper>
     </ShareBox>
@@ -146,7 +149,7 @@ const ShareHr = styled.hr`
   margin: 20px;
 `;
 
-const ShareBottom = styled.div`
+const ShareBottom = styled.form`
   display: flex;
   align-items: center;
   justify-content: space-between;
