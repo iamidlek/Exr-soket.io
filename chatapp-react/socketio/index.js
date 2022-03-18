@@ -18,3 +18,8 @@ const addUser = (userId, socketId) => {
 const removeUser = (socketId) => {
   users = users.filter((user) => user.socketId !== socketId);
 };
+
+io.on("connection", (socket) => {
+  // 유저 접속시 확인용
+  console.log("a user connected.");
+});
