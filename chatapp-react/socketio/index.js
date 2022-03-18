@@ -22,4 +22,10 @@ const removeUser = (socketId) => {
 io.on("connection", (socket) => {
   // 유저 접속시 확인용
   console.log("a user connected.");
+
+  // 유저 리스트에 추가 & 유저 리스트 보내기
+  socket.on("addUser", (userId) => {
+    addUser(userId, socket.id);
+    io.emit("getUsers", users);
+  });
 });
