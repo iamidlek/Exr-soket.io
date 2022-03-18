@@ -28,4 +28,13 @@ io.on("connection", (socket) => {
     addUser(userId, socket.id);
     io.emit("getUsers", users);
   });
+
+  // 받는 사람에게 메세지 보내기
+  socket.on("sendMessage", ({ senderId, receiverId, text }) => {
+    const user = getUser(receiverId);
+    io.to(user.socketId).emit("getMessage", {
+      senderId,
+      text,
+    });
+  });
 });
