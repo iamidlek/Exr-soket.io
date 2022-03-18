@@ -37,4 +37,11 @@ io.on("connection", (socket) => {
       text,
     });
   });
+
+  // 연결 해제 시 유저 리스트 재 전송
+  socket.on("disconnect", () => {
+    console.log("a user disconnected!");
+    removeUser(socket.id);
+    io.emit("getUsers", users);
+  });
 });
