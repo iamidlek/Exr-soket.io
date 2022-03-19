@@ -30,10 +30,12 @@ export default function Topbar() {
             <Person />
             <TopbarIconBadge>1</TopbarIconBadge>
           </TopbarIconItem>
-          <TopbarIconItem>
-            <Chat />
-            <TopbarIconBadge>2</TopbarIconBadge>
-          </TopbarIconItem>
+          <Link to="/messenger">
+            <TopbarIconItem>
+              <Chat style={{ color: 'white' }} />
+              <TopbarIconBadge>2</TopbarIconBadge>
+            </TopbarIconItem>
+          </Link>
           <TopbarIconItem>
             <Notifications />
             <TopbarIconBadge>1</TopbarIconBadge>
